@@ -258,20 +258,19 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"> 
 
      <!-- TARJETA PRINCIPAL (Haz click para abrir) -->
-<div class="reveal scard p-8 cursor-pointer" style="transition-delay:.07s" onclick="openServicesPanel()">
+<div class="reveal scard p-8 cursor-pointer" style="transition-delay:.07s" onclick="openServicesPanel('panel-balayage')">
     <div class="iw w-12 h-12 border border-[#e8d9ce] rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
         <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 2v2m0 16v2M2 12h2m16 0h2m-3.5-6.5-1.4 1.4m-9.2 9.2-1.4 1.4m0-12L6.9 7.5m9.2 9.2 1.4 1.4"/></svg>
     </div>
     <h3 class="font-display text-2xl font-light mb-3">Babylights i Balayage</h3>
     <p class="font-body text-[#1a1a1a] text-sm leading-relaxed mb-4">Especialistes en tècniques de llums naturals. Descobreix tots els nostres serveis personalitzats.</p>
-    <span class="font-body text-xs uppercase tracking-widest text-[#c9aa96] inline-flex items-center gap-2">Ver Serveis <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+    <span class="font-body text-xs uppercase tracking-widest text-[#c9aa96] inline-flex items-center gap-2">Guia del Balayage <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
 </div>
 
 <!-- FONDO OSCURO DETRÁS DEL PANEL -->
-<div id="services-backdrop" class="side-panel-backdrop" onclick="closeServicesPanel()"></div>
-
+<div id="global-backdrop" class="side-panel-backdrop" onclick="closeActivePanel()"></div>
 <!-- PANEL LATERAL DESLIZANTE -->
-<div id="services-panel" class="side-panel">
+<div id="panel-balayage" class="side-panel">
     <!-- Cabecera del Panel -->
     <div class="p-6 border-b border-[#e8d9ce] flex justify-between items-center bg-[#f5f0ea]">
         <div>
@@ -552,19 +551,28 @@
         sessionStorage.setItem('wa_opened','1');
       }
     }, 4000);
-    function openServicesPanel() {
-    document.getElementById('services-panel').classList.add('active');
-    document.getElementById('services-backdrop').classList.add('active');
-    // Opcional: Bloquea el scroll del body de fondo al abrir el panel
-    document.body.style.overflow = 'hidden';
+    let activePanelId = null;
+
+function openPanel(panelId) {
+    const panel = document.getElementById(panelId);
+    const backdrop = document.getElementById('global-backdrop');
+    
+    if (panel && backdrop) {
+        panel.classList.add('active');
+        backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        activePanelId = panelId; // Guardamos el ID del panel abierto
+    }
 }
 
-function closeServicesPanel() {
-    document.getElementById('services-panel').classList.remove('active');
-    document.getElementById('services-backdrop').classList.remove('active');
-    // Restaura el scroll del body de fondo
-    document.body.style.overflow = '';
-}
+function closeActivePanel() {
+    if (activePanelId) {
+        document.getElementById(activePanelId).classList.remove('active');
+        document.getElementById('global-backdrop').classList.remove('active');
+        document.body.style.overflow = '';
+        activePanelId = null;
+    }
+}}
   </script>
 </body>
 </html>
