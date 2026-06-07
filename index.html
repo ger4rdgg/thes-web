@@ -552,6 +552,19 @@
         sessionStorage.setItem('wa_opened','1');
       }
     }, 4000);
+    function openServicesPanel() {
+    document.getElementById('services-panel').classList.add('active');
+    document.getElementById('services-backdrop').classList.add('active');
+    // Opcional: Bloquea el scroll del body de fondo al abrir el panel
+    document.body.style.overflow = 'hidden';
+}
+
+function closeServicesPanel() {
+    document.getElementById('services-panel').classList.remove('active');
+    document.getElementById('services-backdrop').classList.remove('active');
+    // Restaura el scroll del body de fondo
+    document.body.style.overflow = '';
+}
   </script>
 </body>
 </html>
