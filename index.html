@@ -43,7 +43,7 @@
     .a3{animation:fadeUp .9s .5s both;}
     .a4{animation:fadeUp .9s .7s both;}
 
-    .scard{background:#fff;border:1px solid #e8d9ce;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .35s;cursor: pointer;}
+    .scard{background:#fff;border:1px solid #e8d9ce;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .35s;}
     .scard:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(26,26,26,.09);border-color:#c9aa96;}
     .scard:hover .iw{background:#1a1a1a;}
     .scard:hover .iw svg{stroke:#f5f0ea;}
@@ -256,88 +256,80 @@
       </h2>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"> 
-
      <!-- TARJETA PRINCIPAL (Haz click para abrir) -->
-<div class="reveal scard p-8 cursor-pointer" style="transition-delay:.07s" onclick="openPanel('panel-balayage')">
-    <div class="iw w-12 h-12 border border-[#e8d9ce] rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
-        <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 2v2m0 16v2M2 12h2m16 0h2m-3.5-6.5-1.4 1.4m-9.2 9.2-1.4 1.4m0-12L6.9 7.5m9.2 9.2 1.4 1.4"/></svg>
-    </div>
-    <h3 class="font-display text-2xl font-light mb-3">Babylights i Balayage</h3>
-    <p class="font-body text-[#1a1a1a] text-sm leading-relaxed mb-4">Especialistes en tècniques de llums naturals. Descobreix tots els nostres serveis personalitzats.</p>
-    <span class="font-body text-xs uppercase tracking-widest text-[#c9aa96] inline-flex items-center gap-2">Guia del Balayage <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
-</div>
-
-<!-- FONDO OSCURO DETRÁS DEL PANEL -->
-<div id="global-backdrop" class="side-panel-backdrop" onclick="closeActivePanel()"></div>
-<!-- PANEL LATERAL DESLIZANTE -->
-<div id="panel-balayage" class="side-panel">
-    <!-- Cabecera del Panel -->
-    <div class="p-6 border-b border-[#e8d9ce] flex justify-between items-center bg-[#f5f0ea]">
-        <div>
-            <h2 class="font-display text-2xl font-light text-[#1a1a1a]">Babylights & Balayage</h2>
-            <p class="font-body text-xs tracking-wider text-[#c9aa96] uppercase mt-0.5">Els nostres serveis a mida</p>
-        </div>
-        <button onclick="closeServicesPanel()" class="w-10 h-10 flex items-center justify-center rounded-full border border-[#c9aa96] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#f5f0ea] transition-colors duration-300">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-    </div>
-
-    <!-- Contenido con Scroll -->
-    <div class="side-panel-content flex-1">
-        
-        <!-- Subservicio 1 -->
-        <div class="subservice-item">
-            <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Balayage Full Blonde</h4>
-            <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">El ros màxim, intens i global sense perdre la salut del cabell. Treballem un degradat a base d'un cardat estratègic per difuminar l'arrel i saturar de mitjos a puntes. El resultat és un ros net, vibrant i espectacular.</p>
-            <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> Cabells clars o castanys que busquen un canvi radical cap al ros.</p>
-            <p class="font-body text-xs text-[#555]"><strong>Manteniment:</strong> Mitjà-alt (requereix matisos al saló i cura a casa).</p>
-        </div>
-
-        <!-- Subservicio 2 -->
-        <div class="subservice-item">
-            <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Balayage Honey</h4>
-            <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">L'equilibri perfecte entre calidesa, llum natural i moviment. Creem reflexos en tons mel, daurats i sorres que imiten l'efecte del sol. Aporta una llum increïble al rostre i un aspecte de cabell sa i suculent.</p>
-            <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> Bases castanyes o rosses fosques que volen llum sense un ros platí.</p>
-            <p class="font-body text-xs text-[#555]"><strong>Manteniment:</strong> Baix (creix de forma natural i sense talls).</p>
-        </div>
-
-        <!-- Subservicio 3 -->
-        <div class="subservice-item">
-            <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Sweet Balayage</h4>
-            <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Il·luminació molt subtil i dolça per un canvi elegant. Dissenyem fils de llum molt fins en tons avellana, caramel o mel que es fonen de manera invisible amb la teva base per treure la plenitud al color.</p>
-            <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> Qui es fa color per primer cop o busca un efecte molt natural.</p>
-            <p class="font-body text-xs text-[#555]"><strong>Manteniment:</strong> Molt baix (pots passar mesos sense retocar-lo).</p>
-        </div>
-
-        <!-- Subservicio 4 -->
-        <div class="subservice-item">
-            <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Punts de Llum a Mida</h4>
-            <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Punts de llum a mida per a cabells foscos sense perdre la teva identitat. Trenquem la monotonia dels cabells castanys o negres amb tons xocolata, cafè o bronze. Donem profunditat i brillantor sense decolorar en excés.</p>
-            <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> Cabells foscos que volen veure's moderns, diferents i amb llum.</p>
-            <p class="font-body text-xs text-[#555]"><strong>Manteniment:</strong> Mínim (el creixement de l'arrel gairebé ni es nota).</p>
-        </div>
-
-        <!-- Subservicio 5 -->
-        <div class="subservice-item">
-            <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Babylights</h4>
-            <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Fils de llum ultra fins per a un ros uniforme des de l'arrel. Treballem amb un tricotat mil·limètric seleccionant metxons transparents. Simula els reflexos del sol de la infantesa i camufla els cabells blancs.</p>
-            <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> Qui vol veure's rossa des de l'arrel o dissimular les primeres canyes.</p>
-            <p class="font-body text-xs text-[#555]"><strong>Manteniment:</strong> Mitjà (requereix un retoc més freqüent si la teva base no té cabells blancs).</p>
-        </div>
-
-        <!-- Nota de salud capilar de cierre -->
-        <div class="mt-8 p-5 bg-[#f5f0ea] border border-[#e8d9ce] rounded-lg">
-            <p class="font-body text-xs uppercase tracking-wider text-[#c9aa96] font-bold mb-1">La salut és el primer</p>
-            <p class="font-body text-sm text-[#1a1a1a] leading-relaxed">Al nostre saló la salut del teu cabell és el primer. Tots els serveis de color es realitzen sota un <strong>DIAGNÒSTIC GRATUÏT</strong> per aconsellar-te la millor tècnica.</p>
-        </div>
-    </div>
-</div>
-      <div class="reveal scard p-8" style="transition-delay:.14s">
-        <div class="iw w-12 h-12 border border-skin rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
-          <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-        </div>
-        <h3 class="font-display text-2xl font-light mb-3">Color i Tint</h3>
-        <p class="font-body text-mid text-sm leading-relaxed">Color global, mechas, correccions i tractaments de coloració amb productes Montibello de màxima qualitat.</p>
+      <div class="reveal scard p-8 cursor-pointer" style="transition-delay:.07s">
+          <div class="iw w-12 h-12 border border-[#e8d9ce] rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 2v2m0 16v2M2 12h2m16 0h2m-3.5-6.5-1.4 1.4m-9.2 9.2-1.4 1.4m0-12L6.9 7.5m9.2 9.2 1.4 1.4"/></svg>
+          </div>
+          <h3 class="font-display text-2xl font-light mb-3">Balayage i Babylights</h3>
+          <p class="font-body text-[#1a1a1a] text-sm leading-relaxed mb-4">Especialistes en tècniques de llums naturals. Descobreix tots els nostres serveis personalitzats.</p>
+          <span class="font-body text-xs uppercase tracking-widest text-[#c9aa96] inline-flex items-center gap-2" onclick="openPanel('panel-balayage')">Guia del Balayage <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+      </div>
+      
+      <!-- FONDO OSCURO DETRÁS DEL PANEL -->
+      <div id="global-backdrop" class="side-panel-backdrop" onclick="closeActivePanel()"></div>
+      <!-- PANEL LATERAL DESLIZANTE -->
+      <div id="panel-balayage" class="side-panel">
+          <!-- Cabecera del Panel -->
+          <div class="p-6 border-b border-[#e8d9ce] flex justify-between items-center bg-[#f5f0ea]">
+              <div>
+                  <h2 class="font-display text-2xl font-light text-[#1a1a1a]">Babylights & Balayage</h2>
+                  <p class="font-body text-xs tracking-wider text-[#c9aa96] uppercase mt-0.5">Els nostres serveis a mida</p>
+              </div>
+              <button onclick="closeServicesPanel()" class="w-10 h-10 flex items-center justify-center rounded-full border border-[#c9aa96] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#f5f0ea] transition-colors duration-300">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+          </div>
+      
+          <!-- Contenido con Scroll -->
+          <div class="side-panel-content flex-1">
+              
+              <!-- Subservicio 1 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Balayage Full Blonde</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">El ros màxim, intens i global sense perdre la salut del cabell. Treballem un degradat a base d'un cardat estratègic per difuminar l'arrel i saturar de mitjos a puntes. El resultat és un ros net, vibrant i espectacular.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> Cabells clars o castanys que busquen un canvi radical cap al ros.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Manteniment:</strong> Mitjà-alt (requereix matisos al saló i cura a casa).</p>
+              </div>
+      
+              <!-- Subservicio 2 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Balayage Honey</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">L'equilibri perfecte entre calidesa, llum natural i moviment. Creem reflexos en tons mel, daurats i sorres que imiten l'efecte del sol. Aporta una llum increïble al rostre i un aspecte de cabell sa i suculent.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> Bases castanyes o rosses fosques que volen llum sense un ros platí.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Manteniment:</strong> Baix (creix de forma natural i sense talls).</p>
+              </div>
+      
+              <!-- Subservicio 3 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Sweet Balayage</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Il·luminació molt subtil i dolça per un canvi elegant. Dissenyem fils de llum molt fins en tons avellana, caramel o mel que es fonen de manera invisible amb la teva base per treure la plenitud al color.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> Qui es fa color per primer cop o busca un efecte molt natural.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Manteniment:</strong> Molt baix (pots passar mesos sense retocar-lo).</p>
+              </div>
+      
+              <!-- Subservicio 4 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Punts de Llum a Mida</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Punts de llum a mida per a cabells foscos sense perdre la teva identitat. Trenquem la monotonia dels cabells castanys o negres amb tons xocolata, cafè o bronze. Donem profunditat i brillantor sense decolorar en excés.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> Cabells foscos que volen veure's moderns, diferents i amb llum.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Manteniment:</strong> Mínim (el creixement de l'arrel gairebé ni es nota).</p>
+              </div>
+      
+              <!-- Subservicio 5 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Babylights</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Fils de llum ultra fins per a un ros uniforme des de l'arrel. Treballem amb un tricotat mil·limètric seleccionant metxons transparents. Simula els reflexos del sol de la infantesa i camufla els cabells blancs.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> Qui vol veure's rossa des de l'arrel o dissimular les primeres canyes.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Manteniment:</strong> Mitjà (requereix un retoc més freqüent si la teva base no té cabells blancs).</p>
+              </div>
+      
+              <!-- Nota de salud capilar de cierre -->
+              <div class="mt-8 p-5 bg-[#f5f0ea] border border-[#e8d9ce] rounded-lg">
+                  <p class="font-body text-xs uppercase tracking-wider text-[#c9aa96] font-bold mb-1">La salut és el primer</p>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed">Al nostre saló la salut del teu cabell és el primer. Tots els serveis de color es realitzen sota un <strong>DIAGNÒSTIC GRATUÏT</strong> per aconsellar-te la millor tècnica.</p>
+              </div>
+          </div>
       </div>
       <div class="reveal scard p-8" style="transition-delay:.21s">
         <div class="iw w-12 h-12 border border-skin rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
@@ -346,13 +338,27 @@
         <h3 class="font-display text-2xl font-light mb-3">Tractaments Capilars</h3>
         <p class="font-body text-mid text-sm leading-relaxed">Hidratació, nutrició, keratina i reparació intensiva. Seleccionem el tractament ideal per a la salut del teu cabell.</p>
       </div>
+      <div class="reveal scard p-8" style="transition-delay:.14s">
+        <div class="iw w-12 h-12 border border-skin rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <h3 class="font-display text-2xl font-light mb-3">Color i Tint</h3>
+        <p class="font-body text-mid text-sm leading-relaxed">Color global, mechas, correccions i tractaments de coloració amb productes Montibello de màxima qualitat.</p>
+      </div>
+      
 
       <div class="reveal scard p-8">
         <div class="iw w-12 h-12 border border-skin rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
           <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.121 9.879a3 3 0 10-4.242 4.242m4.242-4.242L19 5m-4.879 4.879L16 12m-7.5 6l1.5-1.5m0 0L13 13m-3 5l5-5"/></svg>
         </div>
         <h3 class="font-display text-2xl font-light mb-3">Tall i Pentinat</h3>
-        <p class="font-body text-mid text-sm leading-relaxed">Talls de tendència adaptats a la teva morfologia facial i estil de vida. Dissenyem la forma que millor t'expressa.</p>
+        <p class="font-body text-mid text-sm leading-relaxed">Un tall actual que no et doni feina a casa i on t'aconsellem el que millor et queda.
+
+T'escoltem i mirem com és el teu cabell per fer-te un tall còmode, modern i que no et prengui temps al matí. La nostra prioritat és la teva comoditat i ser sinceres: t'aconsellarem el que realment et afavoreixi més per lluir un cabell sa i bonic cada dia.
+
+ Ideal per a: Qui busca un canvi pràctic, sanejar la melena amb estil i deixar-se guiar per professionals.
+
+ El nostre objectiu: Que surtis guapa i que l'endemà et puguis arreglar tu mateixa en cinc minuts</p>
       </div>
       
       
