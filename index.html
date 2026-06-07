@@ -43,10 +43,35 @@
     .a3{animation:fadeUp .9s .5s both;}
     .a4{animation:fadeUp .9s .7s both;}
 
-    .scard{background:#fff;border:1px solid #e8d9ce;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .35s;}
+    .scard{background:#fff;border:1px solid #e8d9ce;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .35s;cursor: pointer;}
     .scard:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(26,26,26,.09);border-color:#c9aa96;}
     .scard:hover .iw{background:#1a1a1a;}
     .scard:hover .iw svg{stroke:#f5f0ea;}
+    .extra-desc {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease, margin-top 0.4s ease;
+    margin-top: 0;
+}
+
+.scard.expanded .extra-desc {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 1rem; /* Espacio extra al expandirse */
+}
+
+.extra-desc-inner {
+    overflow: hidden;
+}
+
+/* Opcional: Rotar el icono ligeramente al expandir para dar feedback visual */
+.scard .iw svg {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.scard.expanded .iw svg {
+    transform: rotate(90deg);
+}
 
     .orn{display:flex;align-items:center;gap:1rem;}
     .orn::before,.orn::after{content:'';flex:1;height:1px;background:#c9aa96;}
@@ -167,17 +192,23 @@
         Tècnica, cura<br/><em>i personalitat.</em>
       </h2>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"> 
 
-      
-
-      <div class="reveal scard p-8" style="transition-delay:.07s">
-        <div class="iw w-12 h-12 border border-skin rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
-          <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 2v2m0 16v2M2 12h2m16 0h2m-3.5-6.5-1.4 1.4m-9.2 9.2-1.4 1.4m0-12L6.9 7.5m9.2 9.2 1.4 1.4"/></svg>
+      <div class="reveal scard p-8" style="transition-delay:.07s" onclick="this.classList.toggle('expanded')">
+    <div class="iw w-12 h-12 border border-[#e8d9ce] rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
+        <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 2v2m0 16v2M2 12h2m16 0h2m-3.5-6.5-1.4 1.4m-9.2 9.2-1.4 1.4m0-12L6.9 7.5m9.2 9.2 1.4 1.4"/></svg>
+    </div>
+    <h3 class="font-display text-2xl font-light mb-3">Babylights i Balayage</h3>
+    <p class="font-body text-[#1a1a1a] text-sm leading-relaxed">Especialistes en tècniques de llums naturals. Babylights, balayage... cada resultat, únic i personalitzat per a tu.</p>
+    
+    <div class="extra-desc">
+        <div class="extra-desc-inner">
+            <div class="pt-4 border-t border-[#e8d9ce] font-body text-[#1a1a1a] text-sm leading-relaxed">
+                Aquest servei inclou un diagnòstic personalitzat previ, aplicació de tractaments protectors durant la decoloració (tipus Olaplex) i un matís per aconseguir la tonalitat i brillantor desitjades. Temps estimat: 2.5 - 4 hores.
+            </div>
         </div>
-        <h3 class="font-display text-2xl font-light mb-3">Babylights i Balayage</h3>
-        <p class="font-body text-mid text-sm leading-relaxed">Especialistes en tècniques de llums naturals. Babylights, balayage... cada resultat, únic i personalitzat per a tu.</p>
-      </div>
+    </div>
+</div>
       <div class="reveal scard p-8" style="transition-delay:.14s">
         <div class="iw w-12 h-12 border border-skin rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
           <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
