@@ -185,7 +185,7 @@
       <a href="#essencia" class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">El Nostre Espai</a>
       <a href="#serveis"  class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">Serveis</a>
       <a href="#galeria"  class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">Galeria</a>
-      <a href="#resenas"  class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">Ressenyes</a>
+      <!-- <a href="#resenas"  class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">Ressenyes</a> -->
       <a href="#contacte"  class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">Contacte</a>
 
     </nav>
@@ -471,7 +471,7 @@
     </div>
   </section>
 
-  <!-- RESSENYES DE GOOGLE -->
+  <!-- RESSENYES DE GOOGLE
   <section id="resenas" class="py-24 lg:py-36 px-6 lg:px-20 bg-cream">
     <div class="max-w-6xl mx-auto">
       <div class="reveal text-center mb-8">
@@ -491,7 +491,7 @@
       </div>
       <div id="reviews-grid" class="reveal mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3"></div>
     </div>
-  </section>
+  </section> -->
 
   <!-- HORARIS + CONTACTE -->
   <section id="contacte" class="py-24 lg:py-36 px-6 lg:px-20 bg-skinlt">
@@ -620,8 +620,8 @@
     window.addEventListener('scroll',()=>{ navbar.classList.toggle('scrolled',window.scrollY>50); });
 
     // Google reviews integration
-    const googleMapsApiKey = 'AIzaSyDXjhfaBd1chqsMxdSnitgeiG0Y9YSmlCg';
-    const googlePlaceId = 'ChIJX7v2AHzgphIR5Zh4c_Mi0Fs';
+    const googleMapsApiKey = '';
+    const googlePlaceId = '';
     const reviewLink = document.getElementById('google-review-link');
     const reviewsSummary = document.getElementById('reviews-summary');
     const reviewsLoader = document.getElementById('reviews-loader');
@@ -644,7 +644,7 @@
       }
     }
 
-    if (googleMapsApiKey && googleMapsApiKey !== 'AIzaSyDXjhfaBd1chqsMxdSnitgeiG0Y9YSmlCg' && googlePlaceId && googlePlaceId !== 'AIzaSyDXjhfaBd1chqsMxdSnitgeiG0Y9YSmlCg') {
+    if (googleMapsApiKey && googlePlaceId) {
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places`;
       script.async = true;
