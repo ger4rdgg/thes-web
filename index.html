@@ -513,6 +513,27 @@
         </div>
         <h3 class="font-display text-2xl font-light mb-3">Pentinats i Esdeveniments</h3>
         <p class="font-body text-mid text-sm leading-relaxed">Recollits, trenes, cues i ondes per a cada moment únic de la teva vida.</p>
+        <span class="font-body text-xs uppercase cursor-pointer tracking-widest text-[#c9aa96] inline-flex items-center gap-2" onclick="openPanel('panel-pentinats')">Galeria de pentinats<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+
+      </div>
+
+       <!--SIDE PANEL COLORS (panel-colors) FONDO OSCURO DETRÁS DEL PANEL -->
+      <div id="global-backdrop" class="side-panel-backdrop" onclick="closeActivePanel()"></div>
+      <!-- PANEL LATERAL DESLIZANTE -->
+      <div id="panel-pentinats" class="side-panel">
+          <!-- Cabecera del Panel -->
+          <div class="p-6 border-b border-[#e8d9ce] flex justify-between items-center bg-[#f5f0ea]">
+              <div>
+                  <h2 class="font-display text-2xl font-light text-[#1a1a1a]">Galeria de pentinats</h2>
+              </div>
+              <button onclick="closeActivePanel()" class="w-10 h-10 flex items-center justify-center rounded-full border border-[#c9aa96] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#f5f0ea] transition-colors duration-300">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+          </div>
+      
+          <!-- Contenido con Scroll -->
+          <div class="side-panel-content flex-1">
+          </div>
       </div>
 
       <div class="reveal scard p-8 bg-dark border-dark flex flex-col justify-between" style="transition-delay:.35s">
