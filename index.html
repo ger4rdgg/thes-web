@@ -235,7 +235,7 @@
           Més de 30 anys<br/><em>innovant per a tu.</em>
         </h2>
         <div class="space-y-4 font-body text-mid text-sm leading-relaxed">
-          <p>A Peluquería Thes entenem el cabell com una expressió de qui ets. Per això, combinem més de dues dècades d'experiència amb les tècniques més actuals.</p>
+          <p>A Perruquería Thes entenem el cabell com una expressió de qui ets. Per això, combinem més de tres dècades d'experiència amb les tècniques més actuals.</p>
           <p>Però el que realment ens mou és la teva satisfacció: oferir-te un tracte proper, un diagnòstic sincer i aquest moment de pausa que el ritme de vida actual ens demana.</p>
           <p>Treballem amb productes premium perquè creiem que la salut del cabell és la base de qualsevol bon resultat. Cada client és únic, i la nostra tècnica s'adapta sempre al teu objectiu.</p>
           <p>Un espai càlid, professional i en constant evolució. Perquè a THES no deixem mai d'innovar.</p>
@@ -345,7 +345,84 @@
         <h3 class="font-display text-2xl font-light mb-3">Allisats i Tractaments Capilars</h3>
         <!-- <p class="font-body text-mid text-sm leading-relaxed">Hidratació, nutrició, keratina i reparació intensiva. Seleccionem el tractament ideal per a la salut del teu cabell.</p> -->
           <p class="font-body text-mid text-sm leading-relaxed">Allisats, nutrició, hidratació i reparació intensiva. Seleccionem el tractament ideal per a la salut de la teva fibra capilar.</p>
+          <span class="font-body text-xs uppercase cursor-pointer tracking-widest text-[#c9aa96] inline-flex items-center gap-2" onclick="openPanel('panel-allisats')">Guia d'allisats<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
       </div>
+
+      <!--SIDE PANEL COLORS (panel-colors) FONDO OSCURO DETRÁS DEL PANEL -->
+      <div id="global-backdrop" class="side-panel-backdrop" onclick="closeActivePanel()"></div>
+      <!-- PANEL LATERAL DESLIZANTE -->
+      <div id="panel-allisats" class="side-panel">
+          <!-- Cabecera del Panel -->
+          <div class="p-6 border-b border-[#e8d9ce] flex justify-between items-center bg-[#f5f0ea]">
+              <div>
+                  <h2 class="font-display text-2xl font-light text-[#1a1a1a]">Allisats</h2>
+                  <p class="font-body text-xs tracking-wider text-[#c9aa96] uppercase mt-0.5">Els nostres serveis a mida</p>
+              </div>
+              <button onclick="closeActivePanel()" class="w-10 h-10 flex items-center justify-center rounded-full border border-[#c9aa96] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#f5f0ea] transition-colors duration-300">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+          </div>
+      
+          <!-- Contenido con Scroll -->
+          <div class="side-panel-content flex-1">
+              
+              <!-- Subservicio 1 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Allisat Disciplinant</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3"><strong>Redueix l’encrespament, controla el volum i facilita el pentinat diari.</strong> El cabell queda més suau, brillant i manejable.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> cabells amb frizz, ondulats o difícils de pentinar.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Durada aproximada:</strong> Entre 4 i 6 mesos.</p>
+
+              </div>
+      
+              <!-- Subservicio 2 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Allisat Reparador</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Combina l’efecte allisador amb una acció reparadora que millora l’aspecte de la fibra capil·lar, aportant suavitat i brillantor.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> cabells sensibilitzats, tenyits o amb tendència a encrespar-se.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Durada aproximada:</strong> Entre 4 i 6 mesos.</p>
+
+              </div>
+      
+              <!-- Subservicio 3 -->
+              <div>
+                  <h2 class="font-display text-2xl font-light text-[#1a1a1a]">Tractaments</h2>
+                  <p class="font-body text-xs tracking-wider text-[#c9aa96] uppercase mt-0.5">Els nostres serveis a mida</p>
+              </div>
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Botulínica Capil·lar</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Tractament de nutrició profunda que aporta hidratació, suavitat i brillantor. Ajuda a rejuvenir l’aspecte del cabell, deixant-lo més sa i revitalitzat.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> cabells secs, apagats o amb falta de vitalitat.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Durada aproximada:</strong> Entre 4 i 8 setmanes.</p>
+
+              </div>
+      
+              <!-- Subservicio 4 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Reconstrucció Molecular</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Tractament intensiu que reforça la fibra capil·lar des de l’interior, millorant la resistència, l’elasticitat i la qualitat del cabell.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> cabells danyats per coloracions, decoloracions o l’ús freqüent d’eines tèrmiques.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Durada aproximada:</strong> Entre 4 i 6 setmanes.</p>
+
+              </div>
+    
+              <!-- Subservicio 5 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Hidratació Profunda</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Aporta hidratació i nutrició als cabells secs o deshidratats, retornant la suavitat, la brillantor i el moviment natural.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal per a:</strong> cabells fins, secs o amb manca d’hidratació.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Durada aproximada:</strong> Entre 3 i 5 setmanes.</p>
+
+              </div>
+              <!-- Nota de salud capilar de cierre -->
+              <div class="mt-8 p-5 bg-[#f5f0ea] border border-[#e8d9ce] rounded-lg">
+                  <p class="font-body text-xs uppercase tracking-wider text-[#c9aa96] font-bold mb-1">Diagnòstic personalitzat</p>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed">Analitzem l’estat del teu cabell i t’assessorem sobre el tractament més adequat segons les seves necessitats i els resultats que vols aconseguir.</p>
+              </div>
+          </div>
+      </div>
+
+      <!--FIN SIDE PANEL COLORS (panel-colors) FONDO OSCURO DETRÁS DEL PANEL -->
 
       <!--LESPAI DEL COLOR-->
       <div class="reveal scard p-8" style="transition-delay:.14s">
@@ -583,7 +660,7 @@
             <li class="font-body text-xs text-cream/70">Av. de Miquel Batllori, 58/60, 3 · Lleida</li>
             <li class="mt-2"><a href="https://wa.me/34645621007" target="_blank" class="font-body text-xs text-cream/70 hover:text-cream transition-colors">WhatsApp: 645 62 10 07</a></li>
             <li><a href="https://www.instagram.com/peluqueriathes_lleidabalayage" target="_blank" class="font-body text-xs text-cream/70 hover:text-cream transition-colors">@peluqueriathes_lleidabalayage</a></li>
-            <li><a href="https://www.facebook.com/centredeperruqueriaiesteticathes" target="_blank" class="font-body text-xs text-cream/70 hover:text-cream transition-colors">Facebook: Centre THES</a></li>
+            <li><a href="https://www.facebook.com/peluqueriatheslleidabalayage" target="_blank" class="font-body text-xs text-cream/70 hover:text-cream transition-colors">Facebook: Centre THES</a></li>
           </ul>
         </div>
 
