@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>THES Estilistes · Lleida</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            skin:   '#c9aa96',
+            skinlt: '#e8d9ce',
+            cream:  '#f5f0ea',
+            dark:   '#1a1a1a',
+            mid:    '#5a4a3f',
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"','serif'],
+            body:    ['Jost','sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:#f5f0ea;color:#1a1a1a;font-family:'Jost',sans-serif;}
+
+    #navbar{background:#fff;box-shadow:0 1px 20px rgba(0,0,0,.07);transition:padding .3s;}
+    #navbar.scrolled{padding-top:.35rem;padding-bottom:.35rem;}
+
+    .hero-bg{filter:brightness(.58) saturate(.8);}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+    .a1{animation:fadeUp .9s .1s both;}
+    .a2{animation:fadeUp .9s .3s both;}
+    .a3{animation:fadeUp .9s .5s both;}
+    .a4{animation:fadeUp .9s .7s both;}
+
+    .scard{background:#fff;border:1px solid #e8d9ce;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .35s;}
+    .scard:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(26,26,26,.09);border-color:#c9aa96;}
+    .scard:hover .iw{background:#1a1a1a;}
+    .scard:hover .iw svg{stroke:#f5f0ea;}
+    .extra-desc {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease, margin-top 0.4s ease;
+    margin-top: 0;
+}
+
+.scard.expanded .extra-desc {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 1rem; /* Espacio extra al expandirse */
+}
+
+.extra-desc-inner {
+    overflow: hidden;
+}
+
+/* Opcional: Rotar el icono ligeramente al expandir para dar feedback visual */
+.scard .iw svg {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.scard.expanded .iw svg {
+    transform: rotate(90deg);
+}
+    /* --- Panel Lateral de Subservicios --- */
+.side-panel-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 26, 26, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 99998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+.side-panel-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 550px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+    z-index: 99999;
+    transition: right 0.4s cubic-bezier(.22, 1, .36, 1);
+    display: flex;
+    flex-direction: column;
+}
+.side-panel.active {
+    right: 0;
+}
+
+.side-panel-content {
+    overflow-y: auto;
+    padding: 2.5rem;
+}
+
+/* Personalización de la barra de scroll interna del panel */
+.side-panel-content::-webkit-scrollbar {
+    width: 6px;
+}
+.side-panel-content::-webkit-scrollbar-track {
+    background: #f5f0ea;
+}
+.side-panel-content::-webkit-scrollbar-thumb {
+    background: #c9aa96;
+    border-radius: 3px;
+}
+
+.subservice-item {
+    border-bottom: 1px solid #e8d9ce;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.subservice-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+    .orn{display:flex;align-items:center;gap:1rem;}
+    .orn::before,.orn::after{content:'';flex:1;height:1px;background:#c9aa96;}
+
+    .btn-d{display:inline-block;padding:.8rem 2.2rem;background:#1a1a1a;color:#f5f0ea;font-family:'Jost',sans-serif;font-weight:400;letter-spacing:.12em;font-size:.72rem;text-transform:uppercase;transition:background .3s,letter-spacing .3s;}
+    .btn-d:hover{background:#3d2f26;letter-spacing:.18em;}
+    .btn-o{display:inline-block;padding:.8rem 2.2rem;border:1px solid #1a1a1a;color:#1a1a1a;font-family:'Jost',sans-serif;font-weight:400;letter-spacing:.12em;font-size:.72rem;text-transform:uppercase;transition:background .3s,color .3s,letter-spacing .3s;}
+    .btn-o:hover{background:#1a1a1a;color:#f5f0ea;letter-spacing:.18em;}
+
+    .btn-wa{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 2.2rem;background:#25D366;color:#fff;font-family:'Jost',sans-serif;font-weight:400;letter-spacing:.1em;font-size:.72rem;text-transform:uppercase;transition:background .3s,letter-spacing .3s;}
+    .btn-wa:hover{background:#1da851;letter-spacing:.16em;}
+
+    .gimg{transition:transform .6s cubic-bezier(.22,1,.36,1);}
+    .gimg:hover{transform:scale(1.04);}
+
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s;}
+    .reveal.visible{opacity:1;transform:none;}
+
+    /* WhatsApp floating chat */
+    #wa-chat-bubble { position:fixed; bottom:1.5rem; right:1.5rem; z-index:9999; display:flex; flex-direction:column; align-items:flex-end; gap:.75rem; }
+    #wa-chat-box { display:none; flex-direction:column; background:#fff; border-radius:16px 16px 4px 16px; box-shadow:0 8px 32px rgba(0,0,0,.18); overflow:hidden; width:280px; }
+    #wa-chat-box.open { display:flex; animation:popIn .25s ease; }
+    @keyframes popIn{ from{opacity:0;transform:scale(.9) translateY(10px);} to{opacity:1;transform:scale(1) translateY(0);} }
+    #wa-chat-header { background:#075E54; padding:.9rem 1rem; display:flex; align-items:center; gap:.75rem; }
+    #wa-chat-body { padding:1rem; background:#e5ddd5; }
+    #wa-chat-body .msg { background:#fff; border-radius:0 8px 8px 8px; padding:.65rem .85rem; font-family:'Jost',sans-serif; font-size:.8rem; color:#1a1a1a; max-width:220px; box-shadow:0 1px 2px rgba(0,0,0,.1); position:relative; }
+    #wa-chat-body .msg::after { content:''; position:absolute; top:0; left:-8px; border-width:0 8px 8px 0; border-style:solid; border-color:transparent #fff transparent transparent; }
+    #wa-chat-body .time { font-size:.62rem; color:#888; text-align:right; margin-top:.3rem; }
+    #wa-chat-footer { padding:.75rem 1rem; background:#f0f0f0; }
+    #wa-chat-footer a { display:flex; align-items:center; justify-content:center; gap:.5rem; background:#25D366; color:#fff; border-radius:24px; padding:.6rem 1rem; font-family:'Jost',sans-serif; font-size:.72rem; letter-spacing:.06em; text-decoration:none; font-weight:500; transition:background .2s; }
+    #wa-chat-footer a:hover { background:#1da851; }
+    #wa-fab { width:56px; height:56px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 20px rgba(37,211,102,.5); transition:transform .2s; position:relative; border:none; }
+    #wa-fab:hover { transform:scale(1.08); }
+    @keyframes wapulse{ 0%{transform:scale(1);opacity:.4;} 70%{transform:scale(1.65);opacity:0;} 100%{transform:scale(1.65);opacity:0;} }
+    #wa-fab .pulse{ position:absolute;width:56px;height:56px;border-radius:50%;background:#25D366;animation:wapulse 2.2s ease-out infinite;pointer-events:none; }
+  
+  .control-idioma {
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 15px 0;
+}
+
+/* Prevent gallery images shrinking on mobile in panel-pentinats */
+@media (max-width: 768px) {
+  #panel-pentinats .overflow-hidden {
+    height: auto !important;
+    min-height: 220px !important;
+  }
+  #panel-pentinats .overflow-hidden img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 220px !important;
+    object-fit: cover;
+  }
+}
+
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 px-5 py-2 lg:px-14 flex items-center justify-between">
+    <a style="display: flex; align-items: center;" href="#">
+      <img src="assets/logo.PNG" alt="THES Perruqueria" class="h-14 w-auto" style="margin-right: 15px;"/>
+      <div class="font-body text-[.75rem] tracking-[.45em] uppercase">Estilistas</div>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-7">
+      <a href="#essencia" class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">Nuestro Espacio</a>
+      <a href="#serveis"  class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">Servicios</a>
+      <a href="#galeria"  class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">Galería</a>
+      <a href="#equip"  class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">El Equipo</a>
+      <a href="#resenas"  class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">Reseñas</a>
+      <a href="#contacte"  class="font-body text-xs tracking-widest uppercase text-mid hover:text-dark transition-colors">Contacto</a>
+      <a href="index.html" class="font-body text-xs" aria-label="Català" title="Català"><img src="assets/Flag_of_Catalonia.svg" alt="Català" class="h-4"/></a>
+    </nav>
+    <button id="menuBtn" class="md:hidden flex flex-col gap-[5px]" aria-label="Menú">
+      <span class="w-6 h-px bg-dark block"></span>
+      <span class="w-4 h-px bg-dark block"></span>
+      <span class="w-6 h-px bg-dark block"></span>
+    </button>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden fixed inset-0 z-40 bg-white/97 backdrop-blur-md flex-col items-center justify-center gap-10 md:hidden">
+    <a href="#essencia" class="font-display text-4xl font-light italic text-dark" onclick="closeMenu()">Nuestro Espacio</a>
+    <a href="#serveis"  class="font-display text-4xl font-light italic text-dark" onclick="closeMenu()">Servicios</a>
+    <a href="#galeria"  class="font-display text-4xl font-light italic text-dark" onclick="closeMenu()">Galería</a>
+    <a href="#equip"  class="font-display text-4xl font-light italic text-dark" onclick="closeMenu()">El Equipo</a>
+    <a href="#resenas"  class="font-display text-4xl font-light italic text-dark" onclick="closeMenu()">Reseñas</a>
+    <a href="index.html" class="btn-o mt-4" onclick="closeMenu()" aria-label="Català" title="Català"><img src="assets/Flag_of_Catalonia.svg" alt="Català" class="h-4 w-auto"/></a>
+    <a href="#contacte" class="btn-d mt-4" onclick="closeMenu()">Reservar Cita</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="relative h-screen min-h-[600px] flex items-end pb-20 lg:pb-28 overflow-hidden">
+    <img src="assets/IMG_7734.jpeg" alt="Imatge de l'interior del saló de perruqueria"
+         class="hero-bg absolute inset-0 w-full h-full object-cover object-center"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-dark/82 via-dark/20 to-transparent"></div>
+    <div class="relative z-10 px-6 lg:px-20 max-w-4xl">
+      <h1 class="a2 font-display text-5xl sm:text-6xl lg:text-8xl font-light text-cream leading-[1.05] mb-6">
+        Tu imagen,<br/><em>nuestra pasión.</em>
+      </h1>
+      <p class="a3 font-body font-light text-skinlt/90 text-base sm:text-lg max-w-xl mb-10 leading-relaxed">
+        Más de 30 años cuidando tu cabello con técnicas de vanguardia, productos premium y el trato personalizado que te mereces.
+      </p>
+      <div class="a4 flex flex-wrap gap-4">
+        <a href="#contacte" class="btn-d">Reservar Cita</a>
+        <a href="#serveis"  class="btn-o border-skinlt text-skinlt hover:bg-skinlt hover:text-dark">Nuestros Servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESSÈNCIA -->
+  <section id="essencia" class="py-24 lg:py-36 bg-skinlt overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-20 grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div class="reveal order-2 lg:order-1 overflow-hidden" style="clip-path:polygon(0 0,100% 0,100% 88%,88% 100%,0 100%)">
+        <img src="assets/IMG_7742.jpeg" alt="Imatge de l'interior del saló de perruqueria" class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"/>
+      </div>
+      <div class="reveal order-1 lg:order-2">
+        <p class="orn font-body text-[.6rem] tracking-[.4em] uppercase text-mid mb-6 max-w-xs">Nuestro Espacio</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-light text-dark mb-8 leading-tight">
+          Más de 30 años<br/><em>innovando para ti.</em>
+        </h2>
+        <div class="space-y-4 font-body text-mid text-sm leading-relaxed">
+          <p>En Peluquería Thes entendemos el cabello como una expresión de quién eres. Por eso, combinamos más de tres décadas de experiencia con las técnicas más actuales.</p>
+          <p>Pero lo que realmente nos mueve es tu satisfacción: ofrecerte un trato cercano, un diagnóstico sincero y ese momento de pausa que el ritmo de vida actual nos pide.</p>
+          <p>Trabajamos con productos premium porque creemos que la salud del cabello es la base de cualquier buen resultado. Cada cliente es único, y nuestra técnica se adapta siempre a tu objetivo.</p>
+          <p>Un espacio cálido, profesional y en constante evolución. Porque en THES no dejamos nunca de innovar.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-5 mt-10">
+          <div class="border-t border-skin pt-4"><p class="font-display text-xl font-light text-dark mb-1">Experiencia</p><p class="font-body text-xs text-mid">Más de 30 años en el sector.</p></div>
+          <div class="border-t border-skin pt-4"><p class="font-display text-xl font-light text-dark mb-1">Técnica</p><p class="font-body text-xs text-mid">Formación continua e innovación.</p></div>
+          <div class="border-t border-skin pt-4"><p class="font-display text-xl font-light text-dark mb-1">Productos</p><p class="font-body text-xs text-mid">Marcas premium.</p></div>
+          <div class="border-t border-skin pt-4"><p class="font-display text-xl font-light text-dark mb-1">Tú</p><p class="font-body text-xs text-mid">Siempre en el centro de todo.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- SERVEIS -->
+  <section id="serveis" class="py-24 lg:py-36 px-6 lg:px-20 bg-cream" style="padding-top: 90px;">
+    <div class="reveal text-center mb-16">
+      <p class="orn font-body text-[.6rem] tracking-[.4em] uppercase text-mid mb-6 max-w-xs mx-auto">Nuestros Servicios</p>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-dark leading-tight">
+        Técnica, cuidado<br/><em>y personalidad.</em>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"> 
+     <!-- TARJETA PRINCIPAL (Haz click para abrir) -->
+      <div class="reveal scard p-8" style="transition-delay:.07s">
+          <div class="iw w-12 h-12 border border-[#e8d9ce] rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 2v2m0 16v2M2 12h2m16 0h2m-3.5-6.5-1.4 1.4m-9.2 9.2-1.4 1.4m0-12L6.9 7.5m9.2 9.2 1.4 1.4"/></svg>
+          </div>
+          <h3 class="font-display text-2xl font-light mb-3">Balayage i Babylights</h3>
+          <p class="font-body text-mid text-sm leading-relaxed mb-4">Especialistas en técnicas de luces naturales. Descubre todos nuestros servicios personalizados.</p>
+          <span class="font-body text-xs uppercase tracking-widest text-[#c9aa96] cursor-pointer inline-flex items-center gap-2" onclick="openPanel('panel-balayage')">Guia del Balayage <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+      </div>
+      
+      <!--SIDE PANEL BALAYAGE (panel-balayage) FONDO OSCURO DETRÁS DEL PANEL -->
+      <div id="global-backdrop" class="side-panel-backdrop" onclick="closeActivePanel()"></div>
+      <!-- PANEL LATERAL DESLIZANTE -->
+      <div id="panel-balayage" class="side-panel">
+          <!-- Cabecera del Panel -->
+          <div class="p-6 border-b border-[#e8d9ce] flex justify-between items-center bg-[#f5f0ea]">
+              <div>
+                  <h2 class="font-display text-2xl font-light text-[#1a1a1a]">Babylights & Balayage</h2>
+                  <p class="font-body text-xs tracking-wider text-[#c9aa96] uppercase mt-0.5">Nuestros servicios a medida</p>
+              </div>
+              <button onclick="closeActivePanel()" class="w-10 h-10 flex items-center justify-center rounded-full border border-[#c9aa96] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#f5f0ea] transition-colors duration-300">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+          </div>
+      
+          <!-- Contenido con Scroll -->
+          <div class="side-panel-content flex-1">
+              
+              <!-- Subservicio 1 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Balayage Full Blonde</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">El rubio máximo, intenso y global sin perder la salud del cabello. Trabajamos un degradado a base de un cardado estratégico para difuminar la raíz y saturar de medios a puntas. El resultado es un rubio limpio, vibrante y espectacular.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> Cabellos claros o castaños que buscan un cambio radical hacia el rubio.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Mantenimiento:</strong> Medio-alto (requiere matices en el salón y cuidado en casa).</p>
+              </div>
+
+              <!-- Subservicio 2 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Balayage Honey</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">El equilibrio perfecto entre calidez, luz natural y movimiento. Creamos reflejos en tonos miel, dorados y arenas que imitan el efecto del sol. Aporta una luz increíble al rostro y un aspecto de cabello sano y jugoso.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> Bases castañas o rubias oscuras que quieren luz sin un rubio platino.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Mantenimiento:</strong> Bajo (crece de forma natural y sin cortes).</p>
+              </div>
+
+              <!-- Subservicio 3 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Sweet Balayage</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Iluminación muy sutil y dulce para un cambio elegante. Diseñamos hilos de luz muy finos en tonos avellana, caramelo o miel que se funden de manera invisible con tu base para sacar la plenitud al color.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> Quien se hace color por primera vez o busca un efecto muy natural.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Mantenimiento:</strong> Muy bajo (puedes pasar meses sin retocarlo).</p>
+              </div>
+
+              <!-- Subservicio 4 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Puntos de Luz a Medida</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Puntos de luz a medida para cabellos oscuros sin perder tu identidad. Rompemos la monotonía de los cabellos castaños o negros con tonos chocolate, café o bronce. Damos profundidad y brillo sin decolorar en exceso.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> Cabellos oscuros que quieren verse modernos, diferentes y con luz.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Mantenimiento:</strong> Mínimo (el crecimiento de la raíz casi ni se nota).</p>
+              </div>
+
+              <!-- Subservicio 5 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Babylights</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Hilos de luz ultra finos para un rubio uniforme desde la raíz. Trabajamos con un tricotado milimétrico seleccionando mechones transparentes. Simula los reflejos del sol de la infancia y camufla las canas.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> Quien quiere verse rubia desde la raíz o disimular las primeras canas.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Mantenimiento:</strong> Medio (requiere un retoque más frecuente si tu base no tiene canas).</p>
+              </div>
+
+              <!-- Nota de salud capilar de cierre -->
+              <div class="mt-8 p-5 bg-[#f5f0ea] border border-[#e8d9ce] rounded-lg">
+                  <p class="font-body text-xs uppercase tracking-wider text-[#c9aa96] font-bold mb-1">La salud es lo primero</p>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed">En nuestro salón la salud de tu cabello es lo primero. Todos los servicios de color se realizan bajo un <strong>DIAGNÓSTICO</strong> para aconsejarte la mejor técnica.</p>
+              </div>
+          </div>
+      </div>
+
+      <!--FIN SIDE PANEL BALAYAGE (panel-balayage) FONDO OSCURO DETRÁS DEL PANEL -->
+      
+      <div class="reveal scard p-8" style="transition-delay:.21s">
+        <div class="iw w-12 h-12 border border-skin rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <h3 class="font-display text-2xl font-light mb-3">Alisados y Tratamientos Capilares</h3>
+        <!-- <p class="font-body text-mid text-sm leading-relaxed">Hidratación, nutrición, keratina i reparación intensiva. Seleccionem el tractament ideal per a la salut del teu cabell.</p> -->
+          <p class="font-body text-mid text-sm leading-relaxed">Alisados, nutrición, hidratación y reparación intensiva. Seleccionem el tractament ideal per a la salut de la teva fibra capilar.</p>
+          <span class="font-body text-xs uppercase cursor-pointer tracking-widest text-[#c9aa96] inline-flex items-center gap-2" onclick="openPanel('panel-allisats')">Guia de alisados<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+      </div>
+
+      <!--SIDE PANEL COLORS (panel-colors) FONDO OSCURO DETRÁS DEL PANEL -->
+      <div id="global-backdrop" class="side-panel-backdrop" onclick="closeActivePanel()"></div>
+      <!-- PANEL LATERAL DESLIZANTE -->
+      <div id="panel-allisats" class="side-panel">
+          <!-- Cabecera del Panel -->
+          <div class="p-6 border-b border-[#e8d9ce] flex justify-between items-center bg-[#f5f0ea]">
+              <div>
+                  <h2 class="font-display text-2xl font-light text-[#1a1a1a]">Alisados y Tratamientos</h2>
+                  <p class="font-body text-xs tracking-wider text-[#c9aa96] uppercase mt-0.5">Nuestros servicios a medida</p>
+              </div>
+              <button onclick="closeActivePanel()" class="w-10 h-10 flex items-center justify-center rounded-full border border-[#c9aa96] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#f5f0ea] transition-colors duration-300">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+          </div>
+      
+          <!-- Contenido con Scroll -->
+          <div class="side-panel-content flex-1">
+              
+              <!-- Subservicio 1 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Alisado Disciplinante</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Reduce el encrespamiento, controla el volumen y facilita el peinado diario. El cabello queda más suave, brillante y manejable.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> cabellos con frizz, ondulados o difíciles de peinar.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Duración aproximada:</strong> Entre 4 y 6 meses.</p>
+
+              </div>
+      
+              <!-- Subservicio 2 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Alisado Reparador</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Combina el efecto allisador con una accción reparadora que mejora el aspecto de la fibra capilar, aportando suavidad y brillo.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> cabellos sensibilizados, teñidos o con tendencia a encresparse.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Duración aproximada:</strong> Entre 4 y 6 meses.</p>
+
+              </div>
+      
+              <!-- Subservicio 3 -->
+              
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Botulínica Capilar</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Tratamiento de nutrición profunda que aporta hidratación, suavidad y brillantor. Ajuda a rejuvenir l’aspecte del cabell, deixant-lo més sa i revitalitzat.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> cabellos secos, apagados o con falta de vitalidad.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Duración aproximada:</strong> Entre 4 y 8 semanas.</p>
+
+              </div>
+      
+              <!-- Subservicio 4 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Reconstrucción Molecular</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Tratamiento intensivo que refuerza la fibra capilar desde el interior, mejorando la resistencia, la elasticidad y la calidad del cabello.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> cabellos dañados por teñidos, decoloraciones o el uso frecuente de herramientas térmicas.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Duración aproximada:</strong> Entre 4 y 6 semanas.</p>
+
+              </div>
+    
+              <!-- Subservicio 5 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Hidratación Profunda</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3">Aporta hidratación y nutrición al cabello seco o deshidratado, devolviendo la suavidad, el brillo y el movimiento natural.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> cabellos finos, secos o con falta de hidratación.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>Duración aproximada:</strong> Entre 3 y 5 semanas.</p>
+
+              </div>
+              <!-- Nota de salud capilar de cierre -->
+              <div class="mt-8 p-5 bg-[#f5f0ea] border border-[#e8d9ce] rounded-lg">
+                  <p class="font-body text-xs uppercase tracking-wider text-[#c9aa96] font-bold mb-1">Diagnóstico personalizado</p>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed">Analizamos el estado de tu cabello y te asesores sobre el tratamiento más adecuado según sus necesidades y los resultados que deseas conseguir.</p>
+              </div>
+          </div>
+      </div>
+
+      <!--FIN SIDE PANEL COLORS (panel-colors) FONDO OSCURO DETRÁS DEL PANEL -->
+
+      <!--LESPAI DEL COLOR-->
+      <div class="reveal scard p-8" style="transition-delay:.14s">
+        <div class="iw w-12 h-12 border border-skin rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <h3 class="font-display text-2xl font-light mb-3">El Espacio del Color</h3>
+        <p class="font-body text-mid text-sm leading-relaxed">Colores vibrantes, ricos y con una cobertura perfecta. Trabajamos con productos de alta calidad que cuidan la fibra capilar para que tu cabello no pierda brillo ni suavidad con el paso de las semanas.</p>
+        <span class="font-body text-xs uppercase cursor-pointer tracking-widest text-[#c9aa96] inline-flex items-center gap-2" onclick="openPanel('panel-colors')">Guía de coloraciones<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+      </div>
+      <!--SIDE PANEL COLORS (panel-colors) FONDO OSCURO DETRÁS DEL PANEL -->
+      <div id="global-backdrop" class="side-panel-backdrop" onclick="closeActivePanel()"></div>
+      <!-- PANEL LATERAL DESLIZANTE -->
+      <div id="panel-colors" class="side-panel">
+          <!-- Cabecera del Panel -->
+          <div class="p-6 border-b border-[#e8d9ce] flex justify-between items-center bg-[#f5f0ea]">
+              <div>
+                  <h2 class="font-display text-2xl font-light text-[#1a1a1a]">El Espacio del Color</h2>
+                  <p class="font-body text-xs tracking-wider text-[#c9aa96] uppercase mt-0.5">Nuestros servicios a medida</p>
+              </div>
+              <button onclick="closeActivePanel()" class="w-10 h-10 flex items-center justify-center rounded-full border border-[#c9aa96] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#f5f0ea] transition-colors duration-300">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+          </div>
+      
+          <!-- Contenido con Scroll -->
+          <div class="side-panel-content flex-1">
+              
+              <!-- Subservicio 1 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Coloración Clásica de Alta Cobertura</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3"><strong>Color intenso, vibrante y cobertura total de los cabellos blancos.</strong> Es nuestro servicio de color de toda la vida, ideal si buscas tapar las canas al 100% o hacer un cambio de tono global con una fijación máxima. Utilizamos tintes de alta calidad que garantizan un color rico, profundo y de larga duración desde la raíz hasta las puntas.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong>  Qui necesita una cobertura impecable de las canas rebeldes y busca la máxima durabilidad del color.</p>
+              </div>
+      
+              <!-- Subservicio 2 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Coloración Orgánica y Vegana (Sin Amoníaco)</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3"><strong>El máximo respeto para tu cabello y tu cuero cabelludo.</strong> Este tinte está hecho a base de aceites naturales y agua, totalment lliure d'amoníac  90% d'ingredients d'origen natural. Aconseguim un color súper natural mentre cuidem la salut de la teva melena des de l'interior. És la millor opció per oblidar-te d'olors fortes i, sobretot, de les picors a la pell.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> Pieles sensibles, cabellos finos o para quien busca un resultado natural, respetuoso y libre de químiccs agresivos.</p>
+              </div>
+      
+              <!-- Subservicio 3 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Matiz de Camuflatge (Efecto Reflex)</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3"><strong>Difumina las canas de forma natural, sin la esclavitud de la raíz.</strong> Este servicio no tapa la cana de forma opaca como un tinte normal, sino que la teñye suavemente creando un reflex translúcido. El resultado es un efecto "mecha natural" muy bonito donde la cana se camufla con el resto del cabello. Como no es un tinte compacto, cuando crece el cabello casi no se nota la raya de la raíz.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> Quien comienza a tener las primeras canas y quiere disimularlas sin quedar ligada a teñirse cada mes, o para quien busca un acabado súper natural y transparent.</p>
+              </div>
+      
+              <!-- Subservicio 4 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Gloss (coloración ácida, baño de brillo)</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3"><strong>Una dosis de brillo brutal para probar un color sin miedo a arrepentirse.</strong> Esto no es un tinte de siempre. Es como un maquillaje  para el cabello que va desapareciendo poco a poco con los lavados. Es ideal si quieres probar un cambio de color sin atarte, porque no deja la clásica "raya" de la raíz cuando crece. Además es nuestro mejor aliado para mantener el matiz de tu balayage perfecto como el primer día o para dar vida a un color natural que se ha quedado apagado.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> Qui quiere mantener su balayage impecable, dar brillantor a la melena o hacer un cambio sin la esclavitud de la raíz cada mes.</p>
+              </div>
+      
+              <!-- Subservicio 5 -->
+              <div class="subservice-item">
+                  <h4 class="font-display text-xl font-normal text-[#1a1a1a] mb-2">Coloración 100% Vegetal (Fangs)</h4>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed mb-3"><strong>Plantes i flors que aporten color només a les teves canes i donen cos al cabell.</strong> Això no és química; són plantes barrejades amb aigua calenta. No aclareixen el teu cabell ni canvien la teva base; només tenyeixen les canes amb un reflex translúcid en tons daurats, coures o caobes, creant un efecte de metxa natural. A més, funciona com un tractament: dona un gruix brutal als cabells fins i calma la pell sensible.</p>
+                  <p class="font-body text-xs text-[#555] mb-1"><strong>Ideal para:</strong> Quien busca el 100% natural, cabello fino que necesita fuerza y volumen, o quien quiere camuflar las canas con reflejos cálidos sin la esclavitud de la raíz.</p>
+                  <p class="font-body text-xs text-[#555]"><strong>No es para ti si:</strong> Buscas colores fríos (cenizas), si quieres tapar las canas de forma total y compacta, o si quieres aclarar tu cabello.</p>
+              </div>
+              <!-- Nota de salud capilar de cierre -->
+              <div class="mt-8 p-5 bg-[#f5f0ea] border border-[#e8d9ce] rounded-lg">
+                  <p class="font-body text-xs uppercase tracking-wider text-[#c9aa96] font-bold mb-1">La salud es lo primero</p>
+                  <p class="font-body text-sm text-[#1a1a1a] leading-relaxed">En nuestro salón la salud de tu cabello es lo primero. Todos los servicios de color se realizan bajo un <strong>DIAGNÓSTICO</strong> para aconsejarte la mejor técnica.</p>
+              </div>
+          </div>
+      </div>
+
+      <!--FIN SIDE PANEL COLORS (panel-colors) FONDO OSCURO DETRÁS DEL PANEL -->
+      
+
+      <div class="reveal scard p-8">
+        <div class="iw w-12 h-12 border border-skin rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.121 9.879a3 3 0 10-4.242 4.242m4.242-4.242L19 5m-4.879 4.879L16 12m-7.5 6l1.5-1.5m0 0L13 13m-3 5l5-5"/></svg>
+        </div>
+        <h3 class="font-display text-2xl font-light mb-3">Corte y Peinado</h3>
+        <p class="font-body text-mid text-sm leading-relaxed">
+        Un corte actual que no te cause problemas en casa y en el que te aconsejamos el que mejor te queda.<br/>
+        Te escuchamos y vemos cómo es tu cabello para hacerte un corte cómodo, moderno y que no te tome tiempo por la mañana. <br/>
+        <!--Nuestra prioridad es tu comodidad y ser sinceros: te aconsejaremos lo que realmente te favorezca más para lucir un cabello sano y bonito cada día.-->
+      </div>
+      
+      
+
+      <div class="reveal scard p-8" style="transition-delay:.28s">
+        <div class="iw w-12 h-12 border border-skin rounded-full flex items-center justify-center mb-6 transition-colors duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="#1a1a1a" stroke-width="1.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+        </div>
+        <h3 class="font-display text-2xl font-light mb-3">Peinados y Eventos</h3>
+        <p class="font-body text-mid text-sm leading-relaxed">Recojidos, trenzas, coletas y ondas para cada momento único de tu vida.</p>
+        <span class="font-body text-xs uppercase cursor-pointer tracking-widest text-[#c9aa96] inline-flex items-center gap-2" onclick="openPanel('panel-pentinats')">Galeria de pentinats<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
+
+      </div>
+
+       <!--SIDE PANEL COLORS (panel-colors) FONDO OSCURO DETRÁS DEL PANEL -->
+      <div id="global-backdrop" class="side-panel-backdrop" onclick="closeActivePanel()"></div>
+      <!-- PANEL LATERAL DESLIZANTE -->
+      <div id="panel-pentinats" class="side-panel">
+          <!-- Cabecera del Panel -->
+          <div class="p-6 border-b border-[#e8d9ce] flex justify-between items-center bg-[#f5f0ea]">
+              <div>
+                  <h2 class="font-display text-2xl font-light text-[#1a1a1a]">Galería de peinados</h2>
+              </div>
+              <button onclick="closeActivePanel()" class="w-10 h-10 flex items-center justify-center rounded-full border border-[#c9aa96] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#f5f0ea] transition-colors duration-300">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+          </div>
+           
+      
+          <!-- Contenido con Scroll -->
+          <div class="side-panel-content flex-1 p-6 bg-[#f8f4ef]">
+              <div class="grid gap-4 sm:grid-cols-2 mx-auto mt-3">
+                  <div class="overflow-hidden rounded-2xl shadow-sm">
+                      <img src="assets/images/recollits_1.jpeg" alt="Recollit 1" class="w-full h-72 object-cover object-center" />
+                  </div>
+                  <div class="overflow-hidden rounded-2xl shadow-sm">
+                      <img src="assets/images/recollits_2.jpg" alt="Recollit 2" class="w-full h-72 object-cover object-center" />
+                  </div>
+                  <div class="overflow-hidden rounded-2xl shadow-sm">
+                      <img src="assets/images/IMG_4568.jpeg" alt="Recollit 3" class="w-full h-72 object-cover object-center" />
+                  </div>
+                  <div class="overflow-hidden rounded-2xl shadow-sm">
+                      <img src="assets/images/IMG_8611.jpg" alt="Recollit 4" class="w-full h-72 object-cover object-center" />
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="reveal scard p-8 bg-dark border-dark flex flex-col justify-between" style="transition-delay:.35s">
+        <div>
+          <p class="font-display text-2xl font-light text-cream leading-snug mb-3">Sea cual sea tu objetivo...</p>
+          <p class="font-display text-xl font-light italic text-skin">personalizamos la técnica para ti.</p>
+        </div>
+        <a href="#contacte" class="btn-o border-skin/60 text-skin hover:bg-skin hover:text-dark self-start mt-8">Escríbenos</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="galeria" class="py-20 px-6 lg:px-20 bg-skinlt">
+    <div class="reveal text-center mb-12">
+      <p class="orn font-body text-[.6rem] tracking-[.4em] uppercase text-mid mb-6 max-w-xs mx-auto">Nuestro Trabajo</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-light text-dark">Resultados que<br/><em>hablan por sí solos.</em></h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-6xl mx-auto mt-3">
+      <div class="overflow-hidden h-82 lg:h-80"><img src="assets/images/galeria_1_balayage_full_blonde.jpg" title="Balayage Full Blonde" alt="Imatge d'un tall de cabell i pentinat realitzat al saló de perruqueria" class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"/></div>
+      <div class="overflow-hidden h-82 lg:h-80"><img src="assets/images/galeria_2_balayage_expert.jpeg" title="Balayage Expert" alt="Imatge d'un tall de cabell i pentinat realitzat al saló de perruqueria" class="gimg w-full h-full object-cover object-top"/></div>
+      <div class="overflow-hidden h-82 lg:h-80"><img src="assets/images/galeria_3_sweet_balayage.jpeg" title="Sweet Balayage" alt="Imatge d'un tall de cabell i pentinat realitzat al saló de perruqueria" class="gimg w-full h-full object-cover object-top"/></div>
+      <div class="overflow-hidden h-82 lg:h-80"><img src="assets/images/galeria_4_sweet_balayage.jpeg" title="Sweet Balayage" alt="Imatge d'un tall de cabell i pentinat realitzat al saló de perruqueria" class="gimg w-full h-full object-cover object-top"/></div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-3 max-w-6xl mx-auto mt-3"> 
+      <div class="overflow-hidden h-82 lg:h-90"><img src="assets/images/galeria_5_balayage_honey.jpg" title="Balayage Honey" alt="Imatge d'un tall de cabell i pentinat realitzat al saló de perruqueria" class="gimg w-full h-full object-cover object-top"/></div>
+      <div class="overflow-hidden h-82 lg:h-90"><img src="assets/images/galeria_6_sweet_balayage.jpg" title="Sweet Balayage" alt="Imatge d'un tall de cabell i pentinat realitzat al saló de perruqueria" class="gimg w-full h-full object-cover object-top"/></div>
+      <div class="overflow-hidden h-82 lg:h-90"><img src="assets/images/galeria_7_babylights.jpg" title="Babylights" alt="Imatge d'un tall de cabell i pentinat realitzat al saló de perruqueria" class="gimg w-full h-full object-cover object-top"/></div>
+      <div class="overflow-hidden h-82 lg:h-90"><img src="assets/images/galeria_8_babylights.jpeg" title="Babylights" alt="Imatge d'un tall de cabell i pentinat realitzat al saló de perruqueria" class="gimg w-full h-full object-cover object-top"/></div>
+    </div>
+  </section>
+
+  <!-- SECCIO EQUIP -->
+  <section id="equip" class="py-24 lg:py-24 px-6 lg:px-20 bg-cream">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal text-center mb-10">
+        <p class="orn font-body text-[.6rem] tracking-[.4em] uppercase text-mid mb-6 max-w-xs mx-auto">Nosotras</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-light text-dark leading-tight">
+          El equipo de THES
+        </h2>
+      </div>
+
+
+      <div class="reveal mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
+        <div class="overflow-hidden rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
+          <img src="assets/images/foto_grup.jpeg" alt="Equip THES" class="w-full h-[420px] sm:h-[520px] lg:h-[690px] object-cover object-center" />
+        </div>
+        <div class="text-left lg:pl-4">
+          <p class="font-body text-base sm:text-lg leading-relaxed text-mid max-w-xl">
+            Detrás de este proyecto hay un equipo de mujeres que llevamos años trabajando juntas, unidas por una gran amistad y por la pasión por nuestro oficio. Somos profesionales, transparentes y, por encima de todo, personas bien.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESSENYES DE CLIENTS -->
+  <section id="resenas" class="py-24 lg:py-24 px-6 lg:px-20 bg-skinlt">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal text-center mb-10">
+        <p class="orn font-body text-[.6rem] tracking-[.4em] uppercase text-mid mb-6 max-w-xs mx-auto">Reseñas de clientes</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-light text-dark leading-tight">
+          4 opiniones que hablan<br/><em>de nuestro estilo.</em>
+        </h2>
+      </div>
+      <div class="reveal grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <article class="review-card rounded-2xl p-7">
+          <div class="review-stars text-sm mb-3">★★★★★</div>
+          <p class="font-body text-sm leading-relaxed text-mid">“¡Un trato excelente! El tratamiento Eclat hidrata, da color y te deja el cabello uniforme y súper brillante! Muy bien de precio. ¡Volveré seguro!”</p>
+          <p class="font-body text-sm font-semibold text-dark mt-4">— Julia Queralt</p>
+        </article>
+        <article class="review-card rounded-2xl p-7">
+          <div class="review-stars text-sm mb-3">★★★★★</div>
+          <p class="font-body text-sm leading-relaxed text-mid">“¡Quedé 100% satisfecha con el trabajo de todo el equipo! Me supieron escuchar y aconsejarme según mi cabello y el resultado fue increíble. Me acertaron el tono de rubio que quería. El trato muy profesional y cercano. ¡Vuelvo seguro!”</p>
+          <p class="font-body text-sm font-semibold text-dark mt-4">— Sara Martinez</p>
+        </article>
+        <article class="review-card rounded-2xl p-7">
+          <div class="review-stars text-sm mb-3">★★★★★</div>
+          <p class="font-body text-sm leading-relaxed text-mid">“Estic super contenta!! Des de fa un temps que vinc aquí i sempre surto contenta i em fan justament el que tinc en ment, super super bé!”</p>
+          <p class="font-body text-sm font-semibold text-dark mt-4">— Anna Ruiz</p>
+        </article>
+        <article class="review-card rounded-2xl p-7">
+          <div class="review-stars text-sm mb-3">★★★★★</div>
+          <p class="font-body text-sm leading-relaxed text-mid">“Me he sentido muy contenta con el resultado siempre! Desde que vivo en Lleida me he hecho varias cosas en esta peluquería y siempre, no solo superan mis expectativas, sino que además me aconsejan que es lo mejor! Estoy muy feliz!”</p>
+          <p class="font-body text-sm font-semibold text-dark mt-4">— Ximena Rojas Quiñones</p>
+        </article>
+      </div>
+    </div>
+  </section> 
+
+  <!-- HORARIS + CONTACTE -->
+  <section id="contacte" class="py-24 lg:py-36 px-6 lg:px-20 bg-cream">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-24">
+      <div class="reveal">
+        <p class="orn font-body text-[.6rem] tracking-[.4em] uppercase text-mid mb-6 max-w-xs">Cuando Estamos Aquí</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-light text-dark mb-10">Horarios<br/><em>de atención.</em></h2>
+        <div class="border border-skin divide-y divide-skin">
+          <div class="grid grid-cols-2 px-6 py-4 bg-white/60"><span class="font-body text-sm font-medium text-dark">Lunes</span><span class="font-body text-sm text-mid/60 text-right italic">Cerrado</span></div>
+          <div class="grid grid-cols-2 px-6 py-4"><span class="font-body text-sm font-medium text-dark">Martes – Jueves</span><span class="font-body text-sm text-mid text-right">9:00 – 13:00 / 15:00 – 19:00</span></div>
+          <div class="grid grid-cols-2 px-6 py-4 bg-white/60"><span class="font-body text-sm font-medium text-dark">Viernes</span><span class="font-body text-sm text-mid text-right">9:00 – 19:00</span></div>
+          <div class="grid grid-cols-2 px-6 py-4"><span class="font-body text-sm font-medium text-dark">Sábado</span><span class="font-body text-sm text-mid text-right">9:00 – 13:00</span></div>
+          <div class="grid grid-cols-2 px-6 py-4 bg-white/60"><span class="font-body text-sm font-medium text-dark">Domingo</span><span class="font-body text-sm text-mid/60 text-right italic">Cerrado</span></div>
+        </div>
+        <p class="font-body text-xs text-mid/60 mt-4">* Horarios orientativos. Consulta disponibilidad.</p>
+      </div>
+      <div class="reveal">
+        <p class="orn font-body text-[.6rem] tracking-[.4em] uppercase text-mid mb-6 max-w-xs">Reserva tu cita</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-light text-dark mb-6">Habla<br/><em>con nosotras.</em></h2>
+        <p class="font-body text-sm text-mid leading-relaxed mb-10">Ponte en contacto con nosotras y te encontraremos el momento perfecto. Te esperamos en nuestro centro.</p>
+        <div class="space-y-5 mb-10">
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 border border-skin rounded-full flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="#1a1a1a" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div><p class="font-body text-xs tracking-widest uppercase text-mid mb-0.5">Dirección</p><a href="https://maps.app.goo.gl/9YnUqGvyRaZJwtUe8" target="_blank" class="font-body text-sm text-dark">Av. de Miquel Batllori, 58/60, 3, 25001 · Lleida</a></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 border border-skin rounded-full flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div><p class="font-body text-xs tracking-widest uppercase text-mid mb-0.5">WhatsApp</p><a href="https://wa.me/34645621007" target="_blank" class="font-body text-sm text-dark hover:text-mid transition-colors">645 62 10 07</a></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 border border-skin rounded-full flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="#1a1a1a" stroke-width="1.6" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="#1a1a1a"/></svg>
+            </div>
+            <div><p class="font-body text-xs tracking-widest uppercase text-mid mb-0.5">Instagram</p><a href="https://www.instagram.com/peluqueriathes_lleidabalayage" target="_blank" class="font-body text-sm text-dark hover:text-mid transition-colors">@peluqueriathes_lleidabalayage</a></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 border border-skin rounded-full flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="#1a1a1a" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <div><p class="font-body text-xs tracking-widest uppercase text-mid mb-0.5">Facebook</p><a href="https://www.facebook.com/peluqueriatheslleidabalayage" target="_blank" class="font-body text-sm text-dark hover:text-mid transition-colors">Centre THES Estilistes</a></div>
+          </div>
+        </div>
+        <a href="https://wa.me/34645621007" target="_blank" class="btn-wa">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Reservar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-cream/80 pt-14 pb-7 px-6 lg:px-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 pb-10 border-b border-white/10">
+
+        <div class="flex flex-col items-start gap-3">
+          <p class="font-body text-xs text-cream/50 leading-relaxed">THES <i>estilistas</i>. Más de 30 años en el barrio de la Bordeta, Lleida.</p>
+        </div>
+
+        <div>
+          <p class="font-body text-[.6rem] tracking-[.4em] uppercase text-cream/40 mb-5">Navegación</p>
+          <ul class="space-y-2">
+            <li><a href="#essencia" class="font-body text-xs text-cream/70 hover:text-cream transition-colors">Nuestro Espacio</a></li>            
+            <li><a href="#serveis"  class="font-body text-xs text-cream/70 hover:text-cream transition-colors">Servicios</a></li>
+            <li><a href="#galeria"  class="font-body text-xs text-cream/70 hover:text-cream transition-colors">Galería</a></li>
+            <li><a href="#equip"  class="font-body text-xs text-cream/70 hover:text-cream transition-colors">El equipo</a></li>
+            <li><a href="#contacte" class="font-body text-xs text-cream/70 hover:text-cream transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="font-body text-[.6rem] tracking-[.4em] uppercase text-cream/40 mb-5">Contacto</p>
+          <ul class="space-y-2">
+            <li class="font-body text-xs text-cream/70">Av. de Miquel Batllori, 58/60, 3 · Lleida</li>
+            <li class="mt-2"><a href="https://wa.me/34645621007" target="_blank" class="font-body text-xs text-cream/70 hover:text-cream transition-colors">WhatsApp: 645 62 10 07</a></li>
+            <li><a href="https://www.instagram.com/peluqueriathes_lleidabalayage" target="_blank" class="font-body text-xs text-cream/70 hover:text-cream transition-colors">@peluqueriathes_lleidabalayage</a></li>
+            <li><a href="https://www.facebook.com/peluqueriatheslleidabalayage" target="_blank" class="font-body text-xs text-cream/70 hover:text-cream transition-colors">Facebook: Centro THES</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="font-body text-[.6rem] text-cream/30 tracking-widest uppercase">© 2026 THES Estilistas · Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOATING CHAT -->
+  <div id="wa-chat-bubble">
+    <!-- Chat box -->
+    <div id="wa-chat-box">
+      <div id="wa-chat-header">
+        <div style="width:38px;height:38px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" fill="#25D366" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div>
+          <p style="color:#fff;font-family:'Jost',sans-serif;font-size:.8rem;font-weight:500;margin:0;">THES Estilistas</p>
+          <p style="color:rgba(255,255,255,.7);font-family:'Jost',sans-serif;font-size:.65rem;margin:0;">Normalmente respondemos en minutos</p>
+        </div>
+        <button onclick="toggleChat()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:rgba(255,255,255,.7);font-size:1.2rem;line-height:1;padding:0;">✕</button>
+      </div>
+      <div id="wa-chat-body">
+        <div class="msg">Si tienes alguna duda aquí estamos para resolverla 😊</div>
+        <div class="time">Ahora · THES</div>
+      </div>
+      <div id="wa-chat-footer">
+        <a href="https://wa.me/34645621007?text=Hola!%20Vull%20fer%20una%20consulta%20sobre%20els%20vostres%20serveis." target="_blank">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Abrir chat de WhatsApp
+        </a>
+      </div>
+    </div>
+    <!-- FAB button -->
+    <button id="wa-fab" onclick="toggleChat()" aria-label="Abrir chat de WhatsApp">
+      <span class="pulse"></span>
+      <svg width="28" height="28" fill="white" viewBox="0 0 24 24" style="position:relative;z-index:1;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </button>
+  </div>
+
+  <script>
+    // Navbar
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll',()=>{ navbar.classList.toggle('scrolled',window.scrollY>50); });
+
+    // Mobile menu
+    const btn=document.getElementById('menuBtn');
+    const menu=document.getElementById('mobileMenu');
+    btn.addEventListener('click',()=>{
+      const h=menu.classList.contains('hidden');
+      menu.classList.toggle('hidden',!h);
+      menu.classList.toggle('flex',h);
+    });
+    function closeMenu(){ menu.classList.add('hidden'); menu.classList.remove('flex'); }
+
+    // Scroll reveal
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+    },{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // WhatsApp chat toggle
+    function toggleChat(){
+      const box = document.getElementById('wa-chat-box');
+      box.classList.toggle('open');
+    }
+    // Auto-open after 4s on first visit
+    setTimeout(()=>{
+      const box = document.getElementById('wa-chat-box');
+      if(!sessionStorage.getItem('wa_opened')){
+        box.classList.add('open');
+        sessionStorage.setItem('wa_opened','1');
+      }
+    }, 4000);
+    let activePanelId = null;
+
+function openPanel(panelId) {
+    const panel = document.getElementById(panelId);
+    const backdrop = document.getElementById('global-backdrop');
+    
+    if (panel && backdrop) {
+        panel.classList.add('active');
+        backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        activePanelId = panelId; // Guardamos el ID del panel abierto
+    }
+}
+
+function closeActivePanel() {
+    if (activePanelId) {
+        document.getElementById(activePanelId).classList.remove('active');
+        document.getElementById('global-backdrop').classList.remove('active');
+        document.body.style.overflow = '';
+        activePanelId = null;
+    }
+}
+
+</script>
+</body>
+</html>
